@@ -18,8 +18,8 @@ type
     procedure btnFileClick(Sender: TObject);
   private
     { Private declarations }
-    function CRCString(s: string): longint; 
-    function CRCFile(f: string): longint;
+    function CRCString(s: string): longword;
+    function CRCFile(f: string): longword;
   public
     { Public declarations }
   end;
@@ -48,21 +48,23 @@ begin
 end;
 
 { Get CRC32 of string. }
-function TForm1.CRCString(s: string): longint;
+function TForm1.CRCString(s: string): longword;
 var i, x: integer;
+  r: longint;
 begin
-  Result := -1;
+  r := -1;
   for i := 1 to Length(s) do
     begin
-    x := (Ord(s[i]) xor Result) and $000000FF;
-    Result := (Result shr 8) xor crctable[x];
+    x := (Ord(s[i]) xor r) and $FF;
+    r := (r shr 8) xor crctable[x];
     end;
-  Result := not Result;
+  Result := not r;
 end;
 
 { Get CRC32 of file. }
-function TForm1.CRCFile(f: string): longint;
-var i, x: integer;
+function TForm1.CRCFile(f: string): longword;
+var i, x: integer;  
+  r: longint;
 begin
   { Open file and copy to array. }
   AssignFile(myfile,f); // Get file.
@@ -73,13 +75,13 @@ begin
   CloseFile(myfile); // Close file.
 
   { Get CRC32 of file while it's in a byte array. }
-  Result := -1;
+  r := -1;
   for i := 0 to Length(filearray)-1 do
     begin
-    x := (filearray[i] xor Result) and $000000FF;
-    Result := (Result shr 8) xor crctable[x];
+    x := (filearray[i] xor r) and $FF;
+    r := (r shr 8) xor crctable[x];
     end;
-  Result := not Result;
+  Result := not r;
 end;
 
 procedure TForm1.btnStringClick(Sender: TObject);
