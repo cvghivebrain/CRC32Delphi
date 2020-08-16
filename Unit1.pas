@@ -18,8 +18,8 @@ type
     procedure btnFileClick(Sender: TObject);
   private
     { Private declarations }
-    function CRCString(s: string): longword;
-    function CRCFile(f: string): longword;
+    function CRCString(s: string): string;
+    function CRCFile(f: string): string;
   public
     { Public declarations }
   end;
@@ -48,7 +48,7 @@ begin
 end;
 
 { Get CRC32 of string. }
-function TForm1.CRCString(s: string): longword;
+function TForm1.CRCString(s: string): string;
 var i, x: integer;
   r: longint;
 begin
@@ -58,11 +58,11 @@ begin
     x := (Ord(s[i]) xor r) and $FF;
     r := (r shr 8) xor crctable[x];
     end;
-  Result := not r;
+  Result := LowerCase(InttoHex(not r,8));
 end;
 
 { Get CRC32 of file. }
-function TForm1.CRCFile(f: string): longword;
+function TForm1.CRCFile(f: string): string;
 var i, x: integer;  
   r: longint;
 begin
@@ -81,12 +81,12 @@ begin
     x := (filearray[i] xor r) and $FF;
     r := (r shr 8) xor crctable[x];
     end;
-  Result := not r;
+  Result := LowerCase(InttoHex(not r,8));
 end;
 
 procedure TForm1.btnStringClick(Sender: TObject);
 begin
-  ShowMessage(InttoHex(CRCString(edString.Text),8));
+  ShowMessage(CRCString(edString.Text));
 end;
 
 procedure TForm1.btnFileClick(Sender: TObject);
@@ -94,7 +94,7 @@ begin
   if dlgFile.Execute then
     begin
     edFile.Text := dlgFile.FileName;
-    ShowMessage(InttoHex(CRCFile(dlgFile.FileName),8));
+    ShowMessage(CRCFile(dlgFile.FileName));
     end;
 end;
 
