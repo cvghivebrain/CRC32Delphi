@@ -2,9 +2,9 @@ object Form1: TForm1
   Left = 192
   Top = 124
   BorderStyle = bsDialog
-  Caption = 'CRC32 Delphi Test'
+  Caption = 'CRC32/SHA-1 Delphi Test'
   ClientHeight = 89
-  ClientWidth = 577
+  ClientWidth = 689
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -19,7 +19,7 @@ object Form1: TForm1
     Left = 8
     Top = 8
     Width = 449
-    Height = 33
+    Height = 21
     Enabled = False
     TabOrder = 0
   end
@@ -27,7 +27,7 @@ object Form1: TForm1
     Left = 8
     Top = 48
     Width = 449
-    Height = 33
+    Height = 21
     TabOrder = 1
   end
   object btnFile: TButton
@@ -47,6 +47,24 @@ object Form1: TForm1
     Caption = 'CRC32 String'
     TabOrder = 3
     OnClick = btnStringClick
+  end
+  object btnString2: TButton
+    Left = 575
+    Top = 48
+    Width = 106
+    Height = 33
+    Caption = 'SHA-1 String'
+    TabOrder = 4
+    OnClick = btnString2Click
+  end
+  object btnFile2: TButton
+    Left = 576
+    Top = 8
+    Width = 105
+    Height = 33
+    Caption = 'SHA-1 File...'
+    TabOrder = 5
+    OnClick = btnFile2Click
   end
   object dlgFile: TOpenDialog
     Left = 544
