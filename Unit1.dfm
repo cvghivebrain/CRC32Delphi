@@ -2,9 +2,9 @@ object Form1: TForm1
   Left = 192
   Top = 124
   BorderStyle = bsDialog
-  Caption = 'CRC32/SHA-1 Delphi Test'
+  Caption = 'CRC32/SHA-1/MD5 Delphi Test'
   ClientHeight = 89
-  ClientWidth = 689
+  ClientWidth = 801
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -65,6 +65,24 @@ object Form1: TForm1
     Caption = 'SHA-1 File...'
     TabOrder = 5
     OnClick = btnFile2Click
+  end
+  object btnFile3: TButton
+    Left = 688
+    Top = 8
+    Width = 105
+    Height = 33
+    Caption = 'MD5 File...'
+    TabOrder = 6
+    OnClick = btnFile3Click
+  end
+  object btnString3: TButton
+    Left = 688
+    Top = 48
+    Width = 105
+    Height = 33
+    Caption = 'MD5 String'
+    TabOrder = 7
+    OnClick = btnString3Click
   end
   object dlgFile: TOpenDialog
     Left = 544
